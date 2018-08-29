@@ -1,26 +1,9 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Memory {
+public class Memory implements Iterable<Link>{
 	
 	private ArrayList<Link> memory;
-	
-	public class Link {
-		
-		int key;
-		char opcode;
-		String value;
-		
-		public Link (int key, String value) {
-			this.key = key;
-			this.value = value;
-			opcode = value.charAt(0);
-		}
-		
-		public String toString () {
-			return "Memory Location: " + key + "Value Stored: " + value;
-		}
-		
-	}
 	
 	public Memory () { 
 		memory = new ArrayList<Link>();
@@ -40,5 +23,9 @@ public class Memory {
 	public void removeLink (int index) {
 		Link del = memory.get(index);
 		del = null;
+	}
+	
+	public Iterator<Link> iterator() {
+		return memory.iterator();
 	}
 }

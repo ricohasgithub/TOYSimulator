@@ -10,20 +10,31 @@ public class Main {
 		// TODO Auto-generated method stub
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
+		Memory memory = new Memory();
+		
 		while (true) {
 			/*  Intakes Basic Input (i.e. Memory Location + 4 digit hexadecimal numbers)
 			    Example: 10 7C0A
 				10 - Memory Location
 				7C0A - Either Instruction or Data depending on the state of the machine
 			*/
-			String[] words = br.readLine().split(" ");
+			String line = br.readLine();
+			
+			if (line.equals("0000")) {
+				break;
+			}
+			
+			String[] words = line.split(" ");
 			
 			int memLoc = Integer.parseInt(words[0]);
 			String cmd = words[1];
 			
+			memory.insert(memLoc, cmd);
 		}
 		
-		for ()
+		for (Link curr : memory) {
+			
+		}
 		
 	}
 	
