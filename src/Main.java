@@ -32,14 +32,14 @@ public class Main {
 			memory.insert(memLoc, cmd);
 		}
 		
-		for (Link curr : memory) {
-			
-		}
-		
 	}
 	
-	private static void perform (int memLoc, String cmd) {
-		
+	private static void operate (int index, String cmd) {
+		// Recursive method to implement the specific opcode at the specified location of memory
+		char opcode = cmd.charAt(0);
+		if (opcode == '1') {
+			
+		}
 	}
 	
 }

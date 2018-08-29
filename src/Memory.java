@@ -1,31 +1,35 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Memory implements Iterable<Link>{
+public class Memory{
 	
-	private ArrayList<Link> memory;
+	private final int SIZE = 256;
+	private int currIndex;
+	private Link[] memory;
 	
 	public Memory () { 
-		memory = new ArrayList<Link>();
+		memory = new Link[SIZE];
+		currIndex = 0;
 	}
 	
 	public void insert (int memLoc, String cmd) {
-		memory.add(new Link(memLoc, cmd));
+		memory[memLoc] = new Link(memLoc, cmd);
 	}
 	
 	public String getValFromIndex (int index) {
-		if (memory.get(index) == null) {
+		if (memory[index] == null) {
 			throw new NullPointerException("Link is Missing or Deleted");
 		}
-		return memory.get(index).value;
+		return memory[index].value;
 	}
 	
 	public void removeLink (int index) {
-		Link del = memory.get(index);
+		Link del = memory[index];
 		del = null;
 	}
 	
-	public Iterator<Link> iterator() {
-		return memory.iterator();
+	public int getSize () {
+		return SIZE;
 	}
+	
 }
