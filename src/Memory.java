@@ -1,30 +1,26 @@
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Memory{
 	
 	private final int SIZE = 256;
-	private int currIndex;
-	private Link[] memory;
+	private Link[] queue;
 	
 	public Memory () { 
-		memory = new Link[SIZE];
-		currIndex = 0;
+		queue = new Link[SIZE];
 	}
 	
 	public void insert (int memLoc, String cmd) {
-		memory[memLoc] = new Link(memLoc, cmd);
+		queue[memLoc] = new Link(memLoc, cmd);
 	}
 	
-	public String getValFromIndex (int index) {
-		if (memory[index] == null) {
+	public Link getValFromIndex (int index) {
+		if (queue[index] == null) {
 			throw new NullPointerException("Link is Missing or Deleted");
 		}
-		return memory[index].value;
+		return queue[index];
 	}
 	
 	public void removeLink (int index) {
-		Link del = memory[index];
+		Link del = queue[index];
 		del = null;
 	}
 	

@@ -32,6 +32,8 @@ public class Main {
 			memory.insert(memLoc, cmd);
 		}
 		
+		operate(0, memory.getValFromIndex(0).getValue());
+		
 	}
 	
 	private static void operate (int index, String cmd) {
