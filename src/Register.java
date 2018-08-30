@@ -24,7 +24,7 @@ public class Register {
 		return queue[currIndex];
 	}
 	
-	public void hopIndex (int newIndex) {
+	public void setIndex (int newIndex) {
 		currIndex = newIndex;
 	}
 	
