@@ -10,11 +10,22 @@ public class Register {
 		currIndex = 0;
 	}
 	
+	public void changeValueAt (int index, int intValue) {
+		queue[index] = new Link(intValue);
+	}
+	
 	public Link getValFromIndex (int index) {
 		if (queue[index] == null) {
 			throw new NullPointerException("Link is Missing or Deleted");
 		}
 		return queue[index];
+	}
+	
+	public int getIntValFromIndex (int index) {
+		if (queue[index] == null) {
+			throw new NullPointerException("Link is Missing or Deleted");
+		}
+		return queue[index].intValue;
 	}
 	
 	public Link getValFromCurrIndex () {

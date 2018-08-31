@@ -13,9 +13,9 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		initHexDec();
-		
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+
 		memory = new Memory();
 		register = new Register();
 
@@ -39,7 +39,7 @@ public class Main {
 			memory.insert(memLoc, cmd);
 		}
 
-		operate(0, memory.getValFromIndex(0).getValue());
+		run(0, memory.getValFromIndex(0).getValue());
 
 	}
 
@@ -64,11 +64,73 @@ public class Main {
 		HexDec.put('F', 15);
 	}
 
-	private static void operate (int index, String cmd) {
+	private static void run (int index, String cmd) {
 		// Recursive method to implement the specific opcode at the specified location of memory
 		char opcode = cmd.charAt(0);
-		if (opcode == '1') {
-			
+		if (opcode == '0') {
+			// Halt - End recursive call
+			return;
+		} else if (opcode == '1') {
+			// RR R[d] = R[1] + R[2];
+			int dest = convertHexToDec(cmd.charAt(1) + "");
+			int source1 = convertHexToDec(cmd.charAt(2) + "");
+			int source2 = convertHexToDec(cmd.charAt(3) + "");
+			int sum = register.getIntValFromIndex(source1) + register.getIntValFromIndex(source2);
+			register.changeValueAt(dest, sum);
+			index++;
+			run(index, memory.getValFromIndex(index).getValue());
+		} else if (opcode == '2') {
+			// RR R[d] = R[1] - R[2];
+			int dest = convertHexToDec(cmd.charAt(1) + "");
+			int source1 = convertHexToDec(cmd.charAt(2) + "");
+			int source2 = convertHexToDec(cmd.charAt(3) + "");
+			int diff = register.getIntValFromIndex(source1) - register.getIntValFromIndex(source2);
+			register.changeValueAt(dest, diff);
+			index++;
+			run(index, memory.getValFromIndex(index).getValue());
+		}  else if (opcode == '3') {
+			// RR R[d] = R[1] & R[2];
+			int dest = convertHexToDec(cmd.charAt(1) + "");
+			int source1 = convertHexToDec(cmd.charAt(2) + "");
+			int source2 = convertHexToDec(cmd.charAt(3) + "");
+			int and = register.getIntValFromIndex(source1) & register.getIntValFromIndex(source2);
+			register.changeValueAt(dest, and);
+			index++;
+			run(index, memory.getValFromIndex(index).getValue());
+		} else if (opcode == '4') {
+			// RR R[d] = R[1] ^ R[2];
+			int dest = convertHexToDec(cmd.charAt(1) + "");
+			int source1 = convertHexToDec(cmd.charAt(2) + "");
+			int source2 = convertHexToDec(cmd.charAt(3) + "");
+			int xor = register.getIntValFromIndex(source1) ^ register.getIntValFromIndex(source2);
+			register.changeValueAt(dest, xor);
+			index++;
+			run(index, memory.getValFromIndex(index).getValue());
+		} else if (opcode == '5') {
+			// RR R[d] = R[1] << R[2];
+			int dest = convertHexToDec(cmd.charAt(1) + "");
+			int source1 = convertHexToDec(cmd.charAt(2) + "");
+			int source2 = convertHexToDec(cmd.charAt(3) + "");
+			int shiftL = register.getIntValFromIndex(source1) << register.getIntValFromIndex(source2);
+			register.changeValueAt(dest, shiftL);
+			index++;
+			run(index, memory.getValFromIndex(index).getValue());
+		}  else if (opcode == '6') {
+			// RR R[d] = R[1] >> R[2];
+			int dest = convertHexToDec(cmd.charAt(1) + "");
+			int source1 = convertHexToDec(cmd.charAt(2) + "");
+			int source2 = convertHexToDec(cmd.charAt(3) + "");
+			int shiftR = register.getIntValFromIndex(source1) >> register.getIntValFromIndex(source2);
+			register.changeValueAt(dest, shiftR);
+			index++;
+			run(index, memory.getValFromIndex(index).getValue());
+		} else if (opcode == '7') {
+			// A R[d] = M[addr]
+			int dest = convertHexToDec(cmd.charAt(1) + "");
+			int addr = convertHexToDec(cmd.charAt(2) + "" + cmd.charAt(3));
+			register.changeValueAt(dest, memory.getValFromIndex(addr).getIntValue());
+			index++;
+			run(index, memory.getValFromIndex(index).getValue());
 		}
 	}
 
