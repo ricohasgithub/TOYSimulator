@@ -11,7 +11,7 @@ public class Register {
 	}
 	
 	public void changeValueAt (int index, int intValue) {
-		queue[index] = new Link(intValue);
+		queue[index] = new Link(index, Integer.toHexString(intValue));
 	}
 	
 	public Link getValFromIndex (int index) {
@@ -20,14 +20,7 @@ public class Register {
 		}
 		return queue[index];
 	}
-	
-	public int getIntValFromIndex (int index) {
-		if (queue[index] == null) {
-			throw new NullPointerException("Link is Missing or Deleted");
-		}
-		return queue[index].intValue;
-	}
-	
+
 	public Link getValFromCurrIndex () {
 		if (queue[currIndex] == null) {
 			throw new NullPointerException("Link is Missing or Deleted");

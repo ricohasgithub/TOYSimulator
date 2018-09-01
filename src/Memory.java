@@ -14,7 +14,7 @@ public class Memory{
 	
 	public Link getValFromIndex (int index) {
 		if (queue[index] == null) {
-			throw new NullPointerException("Link is Missing or Deleted");
+			throw new NullPointerException("Link at " + index + " is Missing or Deleted");
 		}
 		return queue[index];
 	}
