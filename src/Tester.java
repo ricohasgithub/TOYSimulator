@@ -35,6 +35,9 @@ public class Tester {
 		System.out.println(register.getValFromIndex(10));
 		System.out.println(register.getValFromIndex(11));
 		System.out.println(register.getValFromIndex(12));
+		
+		
+		System.out.println(register.getValFromIndex(2));
 	}
 	
 	private static void initHexDec () {
